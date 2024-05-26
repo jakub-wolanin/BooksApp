@@ -30,25 +30,27 @@
 
   function initActions() {
 
-    const bookImages = document.querySelectorAll('.book__image');
+    const booksListContainer = document.querySelector(select.containerOf.bookList);
 
-    for (let bookImage of bookImages) {
-      bookImage.addEventListener('dblclick', function (event) {
-        event.preventDefault();
+    booksListContainer.addEventListener('dblclick', function (event) {
+      event.preventDefault();
 
-        const bookId = bookImage.getAttribute('data-id');
+      const clickedElement = event.target.offsetParent;
+
+      if (clickedElement.classList.contains('book__image')) {
+        const bookId = clickedElement.getAttribute('data-id');
 
         if (favoriteBooks.includes(bookId)) {
-          bookImage.classList.remove('favorite');
+          clickedElement.classList.remove('favorite');
           const index = favoriteBooks.indexOf(bookId);
           favoriteBooks.splice(index, 1);
-          
+
         } else {
-          bookImage.classList.add('favorite');
+          clickedElement.classList.add('favorite');
           favoriteBooks.push(bookId);
         }
-      });
-    }
+      }
+    });
   }
 
   render();
