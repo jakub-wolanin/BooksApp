@@ -36,11 +36,17 @@
       bookImage.addEventListener('dblclick', function (event) {
         event.preventDefault();
 
-        bookImage.classList.add('favorite');
-
         const bookId = bookImage.getAttribute('data-id');
 
-        favoriteBooks.push(bookId);
+        if (favoriteBooks.includes(bookId)) {
+          bookImage.classList.remove('favorite');
+          const index = favoriteBooks.indexOf(bookId);
+          favoriteBooks.splice(index, 1);
+          
+        } else {
+          bookImage.classList.add('favorite');
+          favoriteBooks.push(bookId);
+        }
       });
     }
   }
